@@ -1,0 +1,11 @@
+applications:
+- name: elearning-frontend
+  #random-route: true
+  memory:  256M
+  command: yarn production
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  env:
+    lnwza: linjingyun12
+    VUE_APP_TEST: EvanYou
+
+  

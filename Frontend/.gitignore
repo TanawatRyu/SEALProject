@@ -1,0 +1,12 @@
+node_modules/
+*.DS_Store
+README.md
+.github/
+.git/
+logs
+*.log
+.next
+dist/
+manifest.yml
+.env.development
+.env.production
