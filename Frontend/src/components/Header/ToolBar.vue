@@ -122,7 +122,8 @@ export default {
       ],
       items: [
         { title: 'All Videos', icon: 'videocam', page: '/' },
-        { title: 'Subject', icon: 'school', page: '/' }
+        { title: 'Subject', icon: 'school', page: '/' },
+        { title: 'Chat Bot', icon: 'people', page: '/chatbot'}
       ],
       favoriteSubject:[]
     }
