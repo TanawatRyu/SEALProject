@@ -4,6 +4,7 @@
         <v-layout justify-center align-center>
           <v-flex text-xs-center>
               <div class="query">
+                <i class="material-icons chat">chat</i>  
                 <input :aria-label="config.locale.strings.queryTitle" autocomplete="off" v-model="query" class="queryform" @keyup.enter="submit()" :placeholder="config.locale.strings.queryTitle" autofocus type="text">
               </div>
               <section class="wrapper">
@@ -23,17 +24,26 @@
                         <tr>
                             <td class="bubble">{{a.result.resolvedQuery}}</td>
                         </tr>
-
                         <tr>
                             <td>
                                 <div v-if="a.result.fulfillment.speech" class="bubble-bot">
                                         {{a.result.fulfillment.speech}}
                                 </div>
-
-                                <div v-for="r in a.result.fulfillment.messages"></div>
                             </td>
                         </tr>
-                    </table>                    
+                        <tr>
+                            <td>         
+                                <div v-for="r in a.result.fulfillment.messages">
+                                    <div v-if="r.unknown == true" class="google-chip">
+                                        <a class="suggestion" :href="'https://www.google.com/search?q=' + r.text" target="_blank">
+                                        Search for "{{r.text}}" on Google <i class="material-icons openlink">search</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
+                    <a id="bottom"></a>                   
                 </section>    
           </v-flex>
         </v-layout>
@@ -85,52 +95,86 @@ export default {
 </script>
 <style>
 #app {
-  background-color: #e0e0e0;
+    background-color: #e0e0e0;
 }
 .query{
-    height: 50px;
+    height: 80px;
     width: 100%;
     background-color:#ffffff;
     margin: auto;
+    position: fixed;
 }
-.queryform{
-  margin-top: 10px;   
-  font-size: 20px;
-  text-align: center;
+.queryform{  
+    font-size: 30px;
+    width: 30%;
+    text-align: center;
+    margin-bottom: 50px;
 }
 .headline{
-  font-weight: bold;
-  text-align: center;
-  margin-top: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 200px;
 
 }
+.wrapper{
+    margin-top:100px;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
 .chat-window{
-    width: 100%;
+    width:100%;
 }
 .bubble{
-    width: auto;
+    max-width: 600px;
+    height: auto;
     background-color: #ffffff;
-    margin-right: 350px;
-    padding: 16px;
+    margin-top: 15px;
+    padding: 15px;
     border-radius: 8px;
     color: #000000;
     float: right;
     font-size: 25px;
     animation: msg .25s linear;
+    word-wrap: break-word;
+    text-align: left;  
 }
 .bubble-bot{
-    width: auto;
-    margin-left: 350px;
+    max-width: 600px;
+    height: auto;
+    margin-top: 15px;
     background-color: #0066ff;
-    padding: 16px;
+    padding: 15px;
     border-radius: 8px;
     color: #ffffff;
     float: left;
     font-size: 25px;
+    word-wrap: break-word;
     animation: msg .25s linear;
+    text-align: left;  
 }
 @keyframes msg {
     0% {opacity: 0; transform: scale(0.8);} 
     100% {opacity: 1; transform: scale(1);}
+}
+.google-chip{
+    background-color: #3d8bff;
+    margin-top: 15px;
+    padding: 15px;
+    float: left;
+    font-size: 25px;
+    animation: msg .25s linear;
+    border-radius: 50px; 
+    max-width: 600px;
+    word-wrap: break-word;
+    text-align: left;  
+}
+.chat{
+    margin-top: 15px;
+    margin-right: 20px;
+    font-size: 50px;  
+}
+.suggestion,a:hover{
+    color: #ffffff;
 }
 </style>
