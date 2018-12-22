@@ -41,6 +41,11 @@ let router = new Router({
       path: '/subject/:keyword',
       name: 'searchsubject',
       component: () => import('./views/SearchSubject.vue')
+    },
+    {
+      path: '/chatbot',
+      name: 'chatbot',
+      component: () => import('./components/Chat/ChatBot.vue')
     }
   ]
 })
